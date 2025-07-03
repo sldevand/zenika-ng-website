@@ -4,10 +4,11 @@ import { ProductCard } from './components/product-card/product-card';
 import { CatalogService } from './services/catalog/catalog-service';
 import { BasketService } from './services/basket/basket-service';
 import { Menu } from './components/menu/menu';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [ProductCard, Menu],
+  imports: [ProductCard, Menu, CurrencyPipe],
   templateUrl: './app.html',
   styleUrl: './app.css',
   standalone: true,
