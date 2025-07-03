@@ -1,53 +1,30 @@
-import { Component, input } from '@angular/core';
-import { Menu } from './menu/menu';
-import { Product } from './product-card/product.types';
-import { ProductCard } from './product-card/product-card';
+import { Component, inject } from '@angular/core';
+import { Product } from './components/product';
+import { ProductCard } from './components/product-card/product-card';
+import { CatalogService } from './services/catalog/catalog-service';
+import { BasketService } from './services/basket/basket-service';
+import { Menu } from './components/menu/menu';
 
 @Component({
   selector: 'app-root',
-  imports: [Menu, ProductCard],
+  imports: [ProductCard, Menu],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
+  standalone: true,
 })
 export class App {
-  protected title = 'my first component';
-  total = 0;
-  products: Product[] = [
-    {
-      "id": "welsch",
-      "title": "Coding the welsch",
-      "description": "Tee-shirt col rond - Homme",
-      "photo": "/assets/coding-the-welsch.jpg",
-      "price": 20,
-      "stock": 2
-    },
-    {
-      "id": "world",
-      "title": "Coding the world",
-      "description": "Tee-shirt col rond - Homme",
-      "photo": "/assets/coding-the-world.jpg",
-      "price": 18,
-      "stock": 1
-    },
-    {
-      "id": "vador",
-      "title": "Duck Vador",
-      "description": "Tee-shirt col rond - Femme",
-      "photo": "/assets/coding-the-stars.jpg",
-      "price": 21,
-      "stock": 2
-    },
-    {
-      "id": "snow",
-      "title": "Coding the snow",
-      "description": "Tee-shirt col rond - Femme",
-      "photo": "/assets/coding-the-snow.jpg",
-      "price": 19,
-      "stock": 2
-    }
-  ];
+  catalogService = inject(CatalogService);
+  basketService = inject(BasketService);
+  hasProductsInStock = this.catalogService.hasProductsInStock;
+  products = this.catalogService.products;
+  total = this.basketService.total;
 
-    addProductToBasket (product: Product)  {
-      this.total += product.price;
-    }
+  ajouterAuPanier(produit: Product): void {
+    this.catalogService.decreaseStock(produit.id);
+    this.basketService.addItem({
+      id: produit.id,
+      title: produit.title,
+      price: produit.price,
+    });
+  }
 }
