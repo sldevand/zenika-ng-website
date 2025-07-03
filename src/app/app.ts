@@ -13,8 +13,8 @@ import { Menu } from './components/menu/menu';
   standalone: true,
 })
 export class App {
-  catalogService = inject(CatalogService);
-  basketService = inject(BasketService);
+  private catalogService = inject(CatalogService);
+  private basketService = inject(BasketService);
   hasProductsInStock = this.catalogService.hasProductsInStock;
   products = this.catalogService.products;
   total = this.basketService.total;

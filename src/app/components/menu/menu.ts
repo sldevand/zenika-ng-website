@@ -8,6 +8,6 @@ import { BasketService } from '../../services/basket/basket-service';
   styleUrl: './menu.css'
 })
 export class Menu {
-    basketService = inject(BasketService);
+    private basketService = inject(BasketService);
     quantity = computed<number>(() => this.basketService.items().length);
 }
