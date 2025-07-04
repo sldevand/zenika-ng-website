@@ -9,18 +9,26 @@ export const routes: Routes = [
   {
     path: 'basket',
     component: Basket,
+    title: "Mon Panier",
     canMatch: [BasketGuard],
   },
   {
     path: 'basket',
     component: EmptyBasket,
+    title: "Mon panier est vide",
+  },
+  {
+    path: 'catalog',
+    component: Catalog,
+    title: "Liste de produits",
   },
   {
     path: 'product/:id',
     component: ProductDetail,
+    title: "Fiche Produit",
   },
   {
     path: '**',
-    component: Catalog,
+    redirectTo: 'catalog',
   },
 ];
