@@ -32,11 +32,5 @@ export class App implements OnInit{
         error: (error) => console.error(error)
       }
     );
-    this.basketService.addItem(produit.id).subscribe(
-      {
-        next: (item) => this.catalogService.decreaseStock(item.id),
-        error: (error) => console.error(error)
-      }
-    );
   }
 }
