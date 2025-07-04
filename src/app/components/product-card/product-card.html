@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
       <h3 class="h6 card-title">
-        <a class="card-link">{{product().description}}</a>
+        <a class="card-link" [routerLink]="['/product', product().id]">{{product().description}}</a>
       </h3>
       <p class="card-text">{{product().price}} €</p>
       <button class="btn btn-primary" (click)="onClick()">Ajoutez au panier</button>
