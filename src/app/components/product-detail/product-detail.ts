@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input} from '@angular/core';
 
 @Component({
   selector: 'app-product-detail',
@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './product-detail.css'
 })
 export class ProductDetail {
-
+  // withComponentInputBinding() is activated in app.config.ts
+ id = input.required<string>();
 }

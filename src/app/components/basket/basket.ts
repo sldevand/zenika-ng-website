@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { BasketService } from '../../services/basket/basket-service';
-import { BasketItem } from '../../services/basket/basket-item';
 
 @Component({
   selector: 'app-basket',
@@ -8,12 +7,12 @@ import { BasketItem } from '../../services/basket/basket-item';
   templateUrl: './basket.html',
   styleUrl: './basket.css'
 })
-export class Basket {
+export class Basket implements OnInit{
   basketService = inject(BasketService);
   basketItems = this.basketService.items;
   total = this.basketService.total;
 
-  constructor() {
+  ngOnInit() {
     this.basketService.fetchBasket().subscribe();
   }
 }
