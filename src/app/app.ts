@@ -20,12 +20,17 @@ export class App {
   products = this.catalogService.products;
   total = this.basketService.total;
 
+  constructor() {
+    this.catalogService.fetchProducts().subscribe();
+    this.basketService.fetchBasket().subscribe()
+  } 
+
   ajouterAuPanier(produit: Product): void {
-    this.catalogService.decreaseStock(produit.id);
-    this.basketService.addItem({
-      id: produit.id,
-      title: produit.title,
-      price: produit.price,
-    });
+    this.basketService.addItem(produit.id).subscribe(
+      {
+        next: (item) => this.catalogService.decreaseStock(item.id),
+        error: (error) => console.error(error)
+      }
+    );
   }
 }
